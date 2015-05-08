@@ -1,0 +1,23 @@
+.col-1-4 {
+    width: 100%;
+}
+
+#first-child {
+    margin: inherit;
+}
+
+#introtext {
+    font-size: 28px;
+}
+
+#intro {
+    height: 255px;
+}
+
+#logo {
+    line-height: normal;
+}
+
+.pt {
+    line-height: normal;
+}

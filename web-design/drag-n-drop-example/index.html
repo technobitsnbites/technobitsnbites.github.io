@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Drag 'n' Drop Example</title>
+	<meta charset="utf-8">
+	<script src="dragndrop.js"></script>
+	<style>
+	    div {
+		    border: 2px solid #000;
+			width: 100px;
+			height: 100px;
+		}
+	</style>
+</head>
+<body>
+	<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+		<img id="drag1" src="kitten.gif" draggable="true" ondragstart="drag(event)" width="100" height="100">
+	</div>
+	<div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)">
+</body>
+</html>

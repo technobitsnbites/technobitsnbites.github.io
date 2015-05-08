@@ -1,0 +1,99 @@
+<!-- Awesome Python One-liners -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Techno Bits 'n' Bites - Awesome Python One-Liners</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../css/main.css">
+    <link rel="stylesheet" href="../../../css/mobile.css" media="all and (max-width: 1261px)">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:100,300,400">
+</head>
+<body>
+    <header>
+        <h1 id="logo">Techno Bits 'n' Bites</h1>
+        <nav>
+            <ul id="navbar">
+                <li><a href="../../../">Home</a></li>
+                <li><a href="../..">Python</a></li>
+                <li><a href="../../../minecraft">Minecraft</a></li>
+                <li><a href="../../../web-design">Web Design</a></li>
+                <li><a href="../../../misc">Misc.</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="postintro">
+        <h1 id="posttitle">Awesome Python One-Liners</h1>
+    </section>
+    <article>
+        <p>Hi there! Today I thought I would show you a bunch of awesome python one-liners.
+            Full disclosure: I did not write any of these myself.
+            Some of them are from <a href="http://codeblog.dhananjaynene.com/2011/06/10-python-one-liners-to-impress-your-friends/">here</a>
+            and some of them are from <a href="https://wiki.python.org/moin/Powerful%20Python%20One-Liners">here</a>.</p>
+        <p>
+            How much is a terabyte or a megabyte? Find out with this code:<br><br>
+
+            <pre><code>>>> import pprint;pprint.pprint(zip(('Byte', 'KByte', 'MByte', 'GByte', 'TByte'), (1 << 10 * i for i in xrange(5))))<br>
+            [('Byte', 1),<br>
+             ('KByte', 1024),<br>
+             ('MByte', 1048576),<br>
+             ('GByte', 1073741824),<br>
+             ('TByte', 1099511627776L)]<br></code></pre>
+            Note: Python 3 users, you will not have "L" at the end of TByte.</b>
+        </p>
+        <p>
+            What is the largest number that can be represented by 1 Byte? How about 128 Bytes?<br><br>
+            
+            <pre><code>>>> print '\n'.join("%i Byte = %i Bit = largest number: %i" % (j, j*8, 256**j-1) for j in (1 << i for i in xrange(8)))<br>
+            1 Byte = 8 Bit = largest number: 255<br>
+            2 Byte = 16 Bit = largest number: 65535<br>
+            4 Byte = 32 Bit = largest number: 4294967295<br>
+            8 Byte = 64 Bit = largest number: 18446744073709551615<br>
+            16 Byte = 128 Bit = largest number: 340282366920938463463374607431768211455<br>
+            32 Byte = 256 Bit = largest number: 115792089237316195423570985008687907853269984665640564039457584007913129639935<br>
+            64 Byte = 512 Bit = largest number: 13407807929942597099574024998205846127479365820592393377723561443<br>
+            721764030073546976801874298166903427690031858186486050853753882811946569946433649006084095<br>
+            128 Byte = 1024 Bit = largest number: 17976931348623159077293051907890247336179769789423065727343<br>
+            0081157732675805500963132708477322407536021120113879871393357658789768814416622492847430639474124<br>
+            3777678934248654852763022196012460941194530829520850057688381506823424628814739131105408272371633<br>
+            50510684586298239947245938479716304835356329624224137215</b></code></pre>
+        </p>
+        <p>
+            Here is a function that gives all the possible permutations of the numbers passed to it in a list:<br><br>
+            
+            <pre><code>>>> f = lambda l: reduce(lambda z, x: z + [y + [x] for y in z], l, [[]])<br>
+            >>> f([1, 2, 3, 4])<br>
+            [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3], [4], [1, 4], [2, 4], [1, 2, 4], [3, 4], [1, 3, 4], [2, 3, 4], [1, 2, 3, 4]]<br></code></pre>
+            Note: Python 3 users, this function must be rewritten:<br>
+            <pre><code>>>> import functools;f = lambda l: functools.reduce(lambda z, x: z + [y + [x] for y in z], l, [[]])</b></code></pre>
+        </p>
+        <p>
+            Here is a function that gives all the prime numbers up to its parameter:<br><br>
+            
+            <pre><code>>>> f = lambda n: sorted(set(range(2,n+1)).difference(set((p * f) for p in range(2,int(n**0.5) + 2) for f in range(2,(n/p)+1))))<br>
+            >>> f(50)<br>
+            [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]<br></code></pre>
+            Note: Python 3 users, if this does not work, change set(range(2,n+1)) to set(list(range(2,n+1))).</b>
+        </p>
+        <p>
+            To finish off I'd like to show you a useful one-liner that can be applied to several applications. It is the one-line if statement. This is its structure:<br>
+            <b><i>expression1</i> if <i>condition</i> else <i>expression2</i></b><br>
+            The way it works is simple. First it evaluates <b><i>condition</i></b>. If it is <b>True</b>, <b><i>expression1</i></b> is evaluated and returned.<br>
+            If it is <b>False</b>, <b><i>expression2</i></b> is evaluated and returned.<br>
+            Sample usage:<br>
+            <pre><code><b>>>> n = 10<br>
+            >>> s = 'Hi!' if n == 12 else 'Bye!'<br>
+            >>> s<br>
+            'Bye!'<br>
+            >>> n = 12<br>
+            >>> s = 'Hi!' if n == 12 else 'Bye!'<br>
+            >>> s<br>
+            'Hi!'</b></code></pre>
+        </p>
+        <p>
+            Well, that's it for now! Hope you try out these one-liners and show them to your friends.
+        </p>
+    </article>
+    <footer>
+    </footer>
+</body>
+</html>

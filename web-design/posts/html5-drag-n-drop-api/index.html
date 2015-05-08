@@ -1,0 +1,84 @@
+<!-- HTML5 Drag 'n' Drop API -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Techno Bits 'n' Bites - HTML5 Drag 'n' Drop API</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../css/main.css">
+    <link rel="stylesheet" href="../../../css/mobile.css" media="all and (max-width: 1261px)">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:100,300,400">
+</head>
+<body>
+    <header>
+        <h1 id="logo">Techno Bits 'n' Bites</h1>
+        <nav>
+            <ul id="navbar">
+                <li><a href="../../../">Home</a></li>
+                <li><a href="../../../python">Python</a></li>
+                <li><a href="../../../minecraft">Minecraft</a></li>
+                <li><a href="../..">Web Design</a></li>
+                <li><a href="../../../misc">Misc.</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="postintro">
+        <h1 id="posttitle">HTML5 Drag 'n' Drop API</h1>
+    </section>
+    <article>
+        <p>Hello! Today I am going to show you how to use the HTML5 Drag &#39;n&#39; Drop API. Despite what you may think, the API is very easy to learn, and Drag &#39;n&#39; Drop can add a professional touch to any web app. To this end, I will show you a demo of Drag &#39;n&#39; Drop in action, then explain how it works step by step.</p>
+
+<p>The demo is located <a href="../../drag-n-drop-example">here</a>.</p>
+
+<p>First let&#39;s look at the HTML and CSS:</p>
+
+<pre>
+<code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Drag 'n' Drop Example&lt;/title&gt;
+	&lt;meta charset="utf-8"&gt;
+	&lt;script src="dragndrop.js"&gt;&lt;/script&gt;
+	&lt;style&gt;
+	    div {
+		    border: 2px solid #000;
+			width: 100px;
+			height: 100px;
+		}
+	&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"&gt;
+		&lt;img id="drag1" src="kitten.gif" draggable="true" ondragstart="drag(event)" width="100" height="100"&gt;
+	&lt;/div&gt;
+	&lt;div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)"&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<p>The first thing to notice is that we link to a file dragndrop.js in the &lt;head&gt;. This JavaScript file does most of the work. However there is still more things that need to be done in the HTML file. In the &lt;style&gt; element we style the two &lt;div&gt;s, giving them a solid black 2 pixel border and a size of 100x100.&nbsp;In the &lt;body&gt; there are two &lt;div&gt;s with almost identical attributes. The only difference is that ones <strong>id</strong> is &quot;div1&quot; and the others&nbsp;is &quot;div2&quot;. These &lt;div&gt;s represent places that elements can be dropped. The <strong>ondrop</strong> and <strong>ondragover&nbsp;</strong>attributes are events.&nbsp;<strong>ondrop&nbsp;</strong>is triggered when an element is dropped on to it, and&nbsp;<strong>ondragover</strong>&nbsp;is triggered when an element is dragged over it. In our case these events call the JavaScript functions&nbsp;<strong>drop(event)&nbsp;</strong>and <strong>allowDrop(event)</strong>, respectively. As you might expect, these functions deal with the handling of the drop and allowing the drop. We will look into these functions soon. Inside&nbsp;<strong>div1&nbsp;</strong>is an image of a kitten(kitten.gif). There are several important attributes of the &lt;img&gt; to notice. The first is its&nbsp;<strong>id&nbsp;</strong>of &quot;drag1&quot;. This&nbsp;<strong>id&nbsp;</strong>is very important as it is used to determine which element was dropped, should there be more than one. Then there is the&nbsp;<strong>draggable&nbsp;</strong>attribute which is set to &quot;true&quot;. This tells the browser that this element should be draggable. Next is the&nbsp;<strong>ondragstart</strong>&nbsp;event, which is triggered when the element is &quot;picked up&quot;.&nbsp;Finally we set the size of the image to 100x100, to make it the same size as the &lt;div&gt;s. Now that we understand the HTML and CSS, we can move on to the JavaScript. Here is the file dragndrop.js:</p>
+
+<pre>
+<code class="language-javascript">function allowDrop(ev) {
+	ev.preventDefault();
+}
+
+function drag(ev) {
+	ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+	ev.preventDefault();
+	var data = ev.dataTransfer.getData("text");
+	ev.target.appendChild(document.getElementById(data));
+}</code></pre>
+
+<p>As mentioned above, the JavaScript function&nbsp;<strong>allowDrop(event)</strong>&nbsp;allows the element to be dropped. It does this by preventing the browser&#39;s default behavior(disabling drops) with the function&nbsp;<strong>ev.preventDefault()</strong>. The&nbsp;<strong>drag(event)</strong>&nbsp;function is triggered on the drag start. It simply sets the dataTransfer to the event&#39;s target element&#39;s&nbsp;<strong>id</strong>, so that the recipient of the drop knows what has been dropped. It also sets the type of the data to &quot;text&quot;. The&nbsp;<strong>drop(event)</strong>&nbsp;function is called when an element is dropped on another element. &nbsp;It starts by preventing the browsers default behavior, which is dependent on where the element is dropped but is almost never what you want. Then it reads the&nbsp;<strong>id&nbsp;</strong>of the element from the dataTransfer with&nbsp;<strong>ev.dataTransfer.getData(&quot;text&quot;)</strong>&nbsp;and stores it in the variable&nbsp;<strong>data</strong>. &nbsp;Finally it appends the element with&nbsp;<strong>id data</strong>&nbsp;to the target(the &lt;div&gt;) thus removing the image from its previous location and placing it into the div.</p>
+
+<p>If drag and drop still seems a bit blurry, I encourage you to experiment with the concepts shown. This is a very basic drag &#39;n&#39; drop &nbsp;example. Search the internet for &#39;HTML5 Drag &#39;n&#39; Drop&#39; for more complex examples. This demo was based on a tutorial by W3Schools, which you can see <a href="http://www.w3schools.com/html/html5_draganddrop.asp">here</a>.</p>
+
+<p>Hopefully this helped those of you who are struggling to understand drag &#39;n&#39; drop. See you soon and Good Luck Web Designing!</p>
+
+    </article>
+    <footer>
+    </footer>
+</body>
+</html>

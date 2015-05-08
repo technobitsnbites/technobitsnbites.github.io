@@ -1,0 +1,120 @@
+<!-- A Beginners Guide to List Comprehensions -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Techno Bits 'n' Bites - A Beginners Guide to List Comprehensions</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../css/main.css">
+    <link rel="stylesheet" href="../../../css/mobile.css" media="all and (max-width: 1261px)">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:100,300,400">
+</head>
+<body>
+    <header>
+        <h1 id="logo">Techno Bits 'n' Bites</h1>
+        <nav>
+            <ul id="navbar">
+                <li><a href="../../../">Home</a></li>
+                <li><a href="../..">Python</a></li>
+                <li><a href="../../../minecraft">Minecraft</a></li>
+                <li><a href="../../../web-design">Web Design</a></li>
+                <li><a href="../../../misc">Misc.</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="postintro">
+        <h1 id="posttitle">A Beginners Guide to List Comprehensions</h1>
+    </section>
+    <article>
+        <p>Most people think of list comprehensions as being a complex and&nbsp;unnecessary&nbsp;part of Python. However, with a basic understanding of list comprehensions, many things that would take several lines of code to do take only one or two! If this short intro has convinced you that you need to learn about list&nbsp;comprehensions, read on!<br />
+<br />
+I&#39;m going to start by showing you a simple list comprehension and then I will explain how it works. Here it is:</p>
+
+<pre>
+<code class="language-python">l1 = [x + 1 for x in l] </code></pre>
+
+<p><br />
+List comprehensions may look&nbsp;complicated, but what is going on here is actually fairly simple...It is easier to see if I show you the same code without using list comprehensions:&nbsp;</p>
+
+<pre>
+<code class="language-python">l1 = []
+for x in l:
+    l1.append(x + 1)</code></pre>
+
+<p><br />
+Now what&#39;s happening becomes much more obvious. A list comprehension is a shortcut of generating a new list by using data from other lists. In both pieces of code above,&nbsp;<strong>l</strong>&nbsp;is the list we are using to create a new one,&nbsp;<strong>l1&nbsp;</strong>is the new list, and&nbsp;<strong>x</strong>&nbsp;is a&nbsp;temporary variable that is used to create the new list.&nbsp;Now&nbsp;basically&nbsp;what happens, is the list&nbsp;comprehension goes through every item in&nbsp;<strong>l&nbsp;</strong>and, for each one(represented by&nbsp;<strong>x</strong>), adds one to it(hence&nbsp;<strong>x&nbsp;+ 1</strong>) and puts it in the new list...It&#39;s that simple. In this case if&nbsp;<strong>l = [1, 2, 3, 4, 5, 6, 7, 8, 9]</strong>, then&nbsp;<strong>l1 = [2, 3, 4, 5, 6, 7, 8, 9, 10]</strong>.&nbsp;If you didn&#39;t quite grasp it, don&#39;t worry, just read through this a few more times and see if you get it, then move on to the next part.<br />
+<br />
+List comprehensions can also be more complicated. They can include multiple nested for loops, conditions, and more complex expressions(they&#39;re not just limited to&nbsp;<strong>x&nbsp;+ 1</strong>). Don&#39;t worry, we&#39;ll go through all of these in turn.<br />
+<br />
+First are multiple nested loops. To understand these, take the example where you have a two-dimensional list such as this:</p>
+
+<pre>
+<code class="language-python">l = [
+     [1, 2, 3],
+     [4, 5, 6],
+     [7, 8, 9]
+    ]</code></pre>
+
+<p><br />
+Then we wanted to take that list and generate a one-dimensional list of all the elements, so the result is something like this:</p>
+
+<pre>
+<code class="language-python">[1, 2, 3, 4, 5, 6, 7, 8, 9]</code></pre>
+
+<p><br />
+This could be done in one line with a list comprehension like this:</p>
+
+<pre>
+<code class="language-python">l1 = [x for i in l for x in i]</code></pre>
+
+<p><br />
+The corresponding non-comprehension code is:</p>
+
+<pre>
+<code class="language-python">l1 = []
+for i in l:
+    for x in i:
+        l1.append(x)</code></pre>
+
+<p><br />
+This comprehension is slightly more complicated but the essential idea is the same. If you don&#39;t understand this, again read through the last section and try out the code yourself.&nbsp;<br />
+<br />
+The next advanced comprehension topic is conditions. Conditions allow you to only include some of the elements in the new list. For example, let&#39;s say you have this list:</p>
+
+<pre>
+<code class="language-python">l = [1, 0, 4, 56, 78, -2, 6, -84, 67, -299, 356]</code></pre>
+
+<p><br />
+You want to create a new list containing all the elements in this list that are more than zero. Code:</p>
+
+<pre>
+<code class="language-python">l1 = [x for x in l if x &gt; 0]</code></pre>
+
+<p><br />
+Here is the same thing done without comprehensions:</p>
+
+<pre>
+<code class="language-python">l1 = []
+for x in l:
+    if x &gt; 0:
+        l1.append(x)</code></pre>
+
+<p><br />
+Notice the if statement? that is what does all the magic. Basically, this code goes through all the elements in&nbsp;<strong>l</strong>&nbsp;and, for each one,&nbsp;if it&#39;s more than zero, adds it to&nbsp;<strong>l1</strong>. The resulting value of&nbsp;<strong>l1</strong>&nbsp;is:</p>
+
+<pre>
+<code class="language-python">[1, 4, 56, 78, 6, 67, 356]</code></pre>
+
+<p><br />
+If you understand this more or less... Congratulations! If not, once again go back and re-read, test, and keep going.<br />
+<br />
+The last complex topic is actually very simple...complex expressions. Basically, you can have expressions as simple as&nbsp;<strong>x</strong>, or as complex as&nbsp;<strong>(x ** 2)&nbsp;+ ((x - 3) * (1000&nbsp;+ x)&nbsp;</strong>and beyond.<br />
+<br />
+If you have gotten to here without an information overload, Congratulations! If not, don&#39;t worry. List comprehensions can be a bit difficult to pick up right away. But I&nbsp;guarantee you, that before long, you will be a List Comprehension Master of the highest order.<br />
+<br />
+Finally,&nbsp;for more information on all the things you can do with list comprehensions, check out&nbsp;<a href="https://docs.python.org/2/tutorial/datastructures.html#list-comprehensions">https://docs.python.org/2/tutorial/datastructures.html#list-comprehensions</a>&nbsp;for Python 2, and&nbsp;<a href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions</a>&nbsp;for Python 3.</p>
+
+    </article>
+    <footer>
+    </footer>
+</body>
+</html>
